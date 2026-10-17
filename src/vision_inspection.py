@@ -140,7 +140,7 @@ finally:
             set_bool(buf, 0, 0, False)
             set_bool(buf, 0, 2, False)
             client.db_write(DB_NUM, 0, buf)
-    except:
+    except Exception:
         pass
     cap.release()
     cv2.destroyAllWindows()
