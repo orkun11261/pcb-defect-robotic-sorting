@@ -158,7 +158,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Fail-Safe Interlock**: Interlocked with `%M8.0 Python_Alive`. If Python disconnects or fails, `%M8.0` drops to `0`, breaking the seal and halting the entire station immediately.
 - **LADDER Diagram**:
 
-  ![Network 2 - Start / Stop Network](assets/plc_networks/network_2_start_stop.png)
+  ![Network 2 - Start / Stop Network](./assets/plc_networks/network_2_start_stop.png)
 
 ---
 
@@ -166,7 +166,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Function**: When the station is active (`%M1.0`), optical sensor `%I10.2` detects a board, and the robot is not descending (`NOT %M3.0`), the PLC writes `1` to `DB1.DBX0.1 Part_At_Camera`, starting Python's inspection window.
 - **LADDER Diagram**:
 
-  ![Network 3 - Part Detection at Camera](assets/plc_networks/network_3_part_detection.png)
+  ![Network 3 - Part Detection at Camera](./assets/plc_networks/network_3_part_detection.png)
 
 ---
 
@@ -175,7 +175,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Early Defect Exit Logic**: If Python detects an `open_circuit`, `DB1.DBX0.0 Trigger` activates the `SET` dominant input of the `Stop_Mem` SR latch and executes a timer reset instruction (`RT`) on `Timer1`. This converts the transient 10s pulse into a continuous hold until the Cartesian robot transfers the defective board to conveyor 2 (`%I10.4 Second_Band_First_Sensor`), which resets `Stop_Mem` and restarts the main line.
 - **LADDER Diagram**:
 
-  ![Network 4 - Stop Memory SR Latch](assets/plc_networks/network_4_stop_memory_sr.png)
+  ![Network 4 - Stop Memory SR Latch](./assets/plc_networks/network_4_stop_memory_sr.png)
 
 ---
 
@@ -183,7 +183,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Function**: Synchronously energizes Entry Conveyor (`%Q10.0`), Curved Conveyor (`%Q10.5`), and Exit Conveyor (`%Q10.6`) when `%M1.0 AND NOT %M2.0`.
 - **LADDER Diagram**:
 
-  ![Network 5 - Main Conveyor Motor Drivers](assets/plc_networks/network_5_main_conveyor.png)
+  ![Network 5 - Main Conveyor Motor Drivers](./assets/plc_networks/network_5_main_conveyor.png)
 
 ---
 
@@ -191,7 +191,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Function**: SET by Python defect trigger (`DB1.DBX0.0`), latching `%M7.0 Defect_Process_Active`. RESET once the robot clears the board to conveyor 2 sensor (`%I10.4`).
 - **LADDER Diagram**:
 
-  ![Network 6 - Defect Process SR Latch](assets/plc_networks/network_6_defect_process_sr.png)
+  ![Network 6 - Defect Process SR Latch](./assets/plc_networks/network_6_defect_process_sr.png)
 
 ---
 
@@ -201,7 +201,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **State 3 (Release & Home Return)**: PCB arrives at secondary conveyor sensor (`%I10.4`) &rarr; releases vacuum (`%M4.0 RESET`), returns X and Z to home position.
 - **LADDER Diagram**:
 
-  ![Network 7 - Robot Pick & Place Sequence](assets/plc_networks/network_7_pick_and_place.png)
+  ![Network 7 - Robot Pick & Place Sequence](./assets/plc_networks/network_7_pick_and_place.png)
 
 ---
 
@@ -209,7 +209,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Function**: Drives physical PLC outputs: Z-Axis (`%Q10.1`), Vacuum Suction Cup (`%Q10.2`), and X-Axis (`%Q10.3`). Includes `Timer2` (`TON 2s`) delay for controlled descent before dropping onto reject belt.
 - **LADDER Diagram**:
 
-  ![Network 8 - Robot Actuators Output Drivers](assets/plc_networks/network_8_robot_actuators.png)
+  ![Network 8 - Robot Actuators Output Drivers](./assets/plc_networks/network_8_robot_actuators.png)
 
 ---
 
@@ -217,7 +217,7 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Function**: Activated when defective item is transferred onto conveyor 2 (`%I10.4`), setting `%M6.0` and driving reject motor `%Q10.4`. `Timer3` (`TON 1s`) delays shutdown after discharge sensor `%I10.3` clears to guarantee full evacuation.
 - **LADDER Diagram**:
 
-  ![Network 9 - Second Conveyor Control](assets/plc_networks/network_9_second_conveyor.png)
+  ![Network 9 - Second Conveyor Control](./assets/plc_networks/network_9_second_conveyor.png)
 
 ---
 
@@ -229,7 +229,7 @@ The complete PLC control logic is structured across 10 modular networks:
   - **Red Light (`%Q10.7`)**: Communication Fault / Python Offline (`NOT %M8.0`).
 - **LADDER Diagram**:
 
-  ![Network 10 - Watchdog & Stack Light](assets/plc_networks/network_10_watchdog_stacklight.png)
+  ![Network 10 - Watchdog & Stack Light](./assets/plc_networks/network_10_watchdog_stacklight.png)
 
 ---
 
