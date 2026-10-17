@@ -28,8 +28,6 @@ The cell synchronizes an **asynchronous multi-threaded Python runtime** with a *
 
 The operational pipeline interconnects physical/simulated sensors, Cartesian robotics, communication buffers, and deep learning inference engines:
 
-![System Architecture](assets/system_architecture.svg)
-
 ```mermaid
 flowchart TD
     subgraph S7_1200["Siemens S7-1200 PLC (Main OB1 - TIA Portal V18)"]
@@ -102,7 +100,27 @@ Communication utilizes native Siemens S7 Protocol (ISO-on-TCP RFC1006 via Port 1
 
 In real-world AOI systems, executing high-resolution deep learning inference on the main thread causes UI stutter, dropped camera frames, and unpredictable cycle times. Our architecture implements complete **concurrency separation**:
 
-![State Machine Flow](assets/state_machine.svg)
+```mermaid
+flowchart TD
+    IDLE["🔵 STATE 1: IDLE<br/>Main Conveyors Running (%M1.0 AND NOT %M2.0)<br/>Waiting for PCB arrival"]
+    DETECTION{"PCB at Optical Sensor?<br/>(%I10.2 First_Detected_Sensor)"}
+    INSPECT["🟡 STATE 2: 10s INSPECTION WINDOW<br/>Stop_Mem (%M2.0) Active via TP 10s Timer<br/>Decoupled YOLOv8 Worker Thread Analyzing Frames"]
+    DEFECT_CHECK{"Defect Detected?<br/>(open_circuit / trace fault)"}
+    DEFECT["🔴 STATE 3: DEFECT DETECTED<br/>Instant DB1.DBX0.0 Trigger = 1<br/>RT Timer1 Reset & Stop_Mem Latched Dominant"]
+    ROBOT["🤖 CARTESIAN ROBOTIC SORTING<br/>1. Move Z Down (%M3.0) & Vacuum ON (%M4.0)<br/>2. Grip Confirmed (%I10.5) &rarr; Move X (%M5.0)<br/>3. Drop to Reject Belt (%I10.4) &rarr; Motor 2 (%Q10.4) ON"]
+    PASS["🟢 STATE 4: PASS (CLEAN)<br/>10.0s Timeout with Zero Defects<br/>Trigger Remains 0 &rarr; Stop_Mem Cleared"]
+    RESUME["⏩ RESUME MAIN LINE<br/>PCB Continues to Exit Conveyor (%Q10.6)"]
+
+    IDLE --> DETECTION
+    DETECTION -- "Yes (DB1.DBX0.1=1)" --> INSPECT
+    INSPECT --> DEFECT_CHECK
+    DEFECT_CHECK -- "Yes (Early Exit)" --> DEFECT
+    DEFECT --> ROBOT
+    ROBOT -- "Part Evacuated (%I10.4)" --> IDLE
+    DEFECT_CHECK -- "No (10s Elapses)" --> PASS
+    PASS --> RESUME
+    RESUME -- "Sensor Cleared" --> IDLE
+```
 
 1. **Decoupled OpenCV Capture Loop**: 
    - Runs independently at 30–60 FPS.
@@ -128,15 +146,6 @@ Models & Architecture:
 └── Dedicated Training Repo: https://github.com/orkun11261/pcb-copper-trace-inspection
 ```
 
-### Real-Time Latency Benchmark
-
-| Compute Engine | Precision | Latency | Frame Throughput |
-| :--- | :---: | :---: | :---: |
-| **NVIDIA RTX 4090 (TensorRT)** | FP16 | **4.2 ms** | ~238 FPS |
-| **NVIDIA RTX 3080 (PyTorch)** | FP16 | **11.8 ms** | ~84 FPS |
-| **NVIDIA GTX 1660 Ti** | FP32 | **24.5 ms** | ~40 FPS |
-| **Intel Core i7-13700K (CPU)** | FP32 | **48.0 ms** | ~20 FPS |
-
 ---
 
 ## 🛠️ Siemens TIA Portal V18 LADDER Logic (Main OB1)
@@ -148,14 +157,6 @@ The complete PLC control logic is structured across 10 modular networks:
 - **Fail-Safe Electrical Logic**: Physical `Stop PB` is wired as **Normally Closed (NC)** for fail-safe wire-break detection. Under normal operating conditions, `%I10.1` delivers a constant 24V DC (`1`) to the PLC. Therefore, inside the PLC ladder program, it is examined with a **Normally Open contact** (`--[  ]--`) to monitor electrical continuity. Pressing the button or a broken cable immediately de-energizes `%I10.1` (`0`), breaking the rung.
 - **Fail-Safe Interlock**: Interlocked with `%M8.0 Python_Alive`. If Python disconnects or fails, `%M8.0` drops to `0`, breaking the seal and halting the entire station immediately.
 - **LADDER Diagram**:
-
-  ```text
-    Start_Button (%I10.0)      Stop_Button (%I10.1 [NC])     Python_Alive (%M8.0)     Start_Mem (%M1.0)
-  --------[  ]--------------------------[  ]--------------------------[  ]-------------------(  )
-      |                    |
-      |   Start_Mem        |
-      +---[  ]-------------+
-  ```
 
   ![Network 2 - Start / Stop Network](assets/plc_networks/network_2_start_stop.png)
 
