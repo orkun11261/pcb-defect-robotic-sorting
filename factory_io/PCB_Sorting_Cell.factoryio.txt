@@ -1,0 +1,11 @@
+# Factory I/O Scene Placeholder: PCB_Sorting_Cell.factoryio
+
+This file indicates the location for the Factory I/O binary scene file:
+`PCB_Sorting_Cell.factoryio`
+
+### How to use this scene:
+1. Save your Factory I/O 3D scene directly into this directory as:
+   `factory_io/PCB_Sorting_Cell.factoryio`
+2. Open Factory I/O (v2.5.x or later).
+3. Click "Open" -> Browse to `factory_io/PCB_Sorting_Cell.factoryio`.
+4. Ensure the driver is connected to Siemens S7-1200 / S7-PLCSIM as specified in `factory_io/README.md`.

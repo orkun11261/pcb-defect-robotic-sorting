@@ -1,0 +1,10 @@
+# Model Weights Pointer: pcb_model_V2.pt
+
+Place your trained Ultralytics YOLOv8 weights file here with filename:
+pcb_model_V2.pt
+
+Target Expected Checksum (SHA-256):
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+In mock/test mode (--mock flag), src/vision_inspection.py will automatically
+synthesize detections without requiring this binary file.

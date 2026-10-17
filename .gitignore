@@ -1,0 +1,82 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Deep Learning / PyTorch / YOLO
+*.pt
+*.pth
+*.onnx
+*.engine
+runs/
+wandb/
+*.tfevents*
+
+# Model weights exception (if tracked via git-lfs or placeholder)
+!models/README.md
+!models/*.txt
+
+# TIA Portal Siemens temporary & backup files
+*.ap15
+*.ap15_1
+*.ap16
+*.ap17
+*.ap18
+*.al15
+*.al16
+*.al17
+*.al18
+*.s7s
+*.bak
+*.dmp
+PEData.plf
+System/
+Logs/
+*~
+
+# Factory I/O cache & logs
+*.cache
+autosave/
+.factoryio_cache/
+*.log
+
+# IDE & OS files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+test_init.txt

@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="siemens" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00646e" />
+      <stop offset="100%" stop-color="#00a399" />
+    </linearGradient>
+    <linearGradient id="factoryio" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="python" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="db1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="640" fill="url(#bg)" />
+
+  <!-- Title Header -->
+  <text x="600" y="45" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#f8fafc" text-anchor="middle" letter-spacing="1">
+    INDUSTRIAL SMART PCB INSPECTION &amp; ROBOTIC SORTING CELL
+  </text>
+  <text x="600" y="72" font-family="system-ui, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
+    High-Performance Asynchronous Deep Learning &amp; S7-1200 Fail-Safe Architecture
+  </text>
+
+  <!-- Left: Siemens S7-1200 PLC -->
+  <g transform="translate(60, 110)" filter="url(#shadow)">
+    <rect width="320" height="480" rx="12" fill="url(#factoryio)" stroke="#00a399" stroke-width="2" />
+    <rect width="320" height="50" rx="12" fill="url(#siemens)" />
+    <rect y="38" width="320" height="12" fill="url(#siemens)" />
+    <text x="160" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      SIEMENS S7-1200 PLC (OB1)
+    </text>
+    
+    <!-- Content inside PLC -->
+    <rect x="20" y="70" width="280" height="55" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="92" font-family="monospace" font-size="13" font-weight="bold" fill="#38bdf8">Network 2: Start/Stop &amp; Interlock</text>
+    <text x="35" y="112" font-family="sans-serif" font-size="11" fill="#94a3b8">Halt system if Python_Alive (%M8.0)=0</text>
+
+    <rect x="20" y="135" width="280" height="55" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="157" font-family="monospace" font-size="13" font-weight="bold" fill="#38bdf8">Network 3 &amp; 4: Detection &amp; Stop</text>
+    <text x="35" y="177" font-family="sans-serif" font-size="11" fill="#94a3b8">TP 10s Timer &amp; DB1.DBX0.1 Inspection</text>
+
+    <rect x="20" y="200" width="280" height="55" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="222" font-family="monospace" font-size="13" font-weight="bold" fill="#38bdf8">Network 7 &amp; 8: Pick &amp; Place</text>
+    <text x="35" y="242" font-family="sans-serif" font-size="11" fill="#94a3b8">Cartesian Gantry State Machine</text>
+
+    <rect x="20" y="265" width="280" height="55" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="287" font-family="monospace" font-size="13" font-weight="bold" fill="#38bdf8">Network 9: Reject Conveyor</text>
+    <text x="35" y="307" font-family="sans-serif" font-size="11" fill="#94a3b8">Defect evacuate via TON 1s timer</text>
+
+    <rect x="20" y="330" width="280" height="75" rx="6" fill="#0f172a" stroke="#e11d48" stroke-width="1.5" />
+    <text x="35" y="352" font-family="monospace" font-size="13" font-weight="bold" fill="#fb7185">Network 10: Watchdog &amp; Stack</text>
+    <text x="35" y="372" font-family="sans-serif" font-size="11" fill="#cbd5e1">TOF 1.0s Timer &amp; Heartbeat Monitor</text>
+    <text x="35" y="392" font-family="sans-serif" font-size="11" fill="#fbbf24">Green (%Q11.0) | Yellow | Red (%Q10.7)</text>
+
+    <rect x="20" y="415" width="280" height="45" rx="6" fill="#064e3b" stroke="#10b981" />
+    <text x="160" y="442" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#a7f3d0" text-anchor="middle">
+      TIA PORTAL V18 (S7-1214C)
+    </text>
+  </g>
+
+  <!-- Center: DB1 Data Block Memory Map & RFC1006 Comm -->
+  <g transform="translate(420, 160)" filter="url(#shadow)">
+    <rect width="360" height="380" rx="12" fill="#030712" stroke="#ea580c" stroke-width="2" />
+    <rect width="360" height="45" rx="12" fill="url(#db1)" />
+    <rect y="33" width="360" height="12" fill="url(#db1)" />
+    <text x="180" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      DATA BLOCK 1: DB_Python
+    </text>
+    <text x="180" y="65" font-family="monospace" font-size="12" fill="#fdba74" text-anchor="middle">
+      Non-Optimized Access (Byte-Aligned)
+    </text>
+
+    <!-- Signal 1: Trigger -->
+    <rect x="20" y="85" width="320" height="70" rx="6" fill="#18181b" stroke="#3f3f46" />
+    <text x="35" y="107" font-family="monospace" font-size="13" font-weight="bold" fill="#f43f5e">DB1.DBX0.0 : Trigger (BOOL)</text>
+    <text x="35" y="126" font-family="sans-serif" font-size="11" fill="#a1a1aa">Direction: Python &rarr; S7-1200 PLC</text>
+    <text x="35" y="143" font-family="sans-serif" font-size="11" fill="#fbcfe8">High on Defect (open_circuit) &rarr; SET %M7.0</text>
+
+    <!-- Signal 2: Part_At_Camera -->
+    <rect x="20" y="165" width="320" height="70" rx="6" fill="#18181b" stroke="#3f3f46" />
+    <text x="35" y="187" font-family="monospace" font-size="13" font-weight="bold" fill="#38bdf8">DB1.DBX0.1 : Part_At_Camera (BOOL)</text>
+    <text x="35" y="206" font-family="sans-serif" font-size="11" fill="#a1a1aa">Direction: S7-1200 PLC &rarr; Python</text>
+    <text x="35" y="223" font-family="sans-serif" font-size="11" fill="#bae6fd">Optical Sensor %I10.2 &rarr; Starts 10s Window</text>
+
+    <!-- Signal 3: Heartbeat -->
+    <rect x="20" y="245" width="320" height="70" rx="6" fill="#18181b" stroke="#3f3f46" />
+    <text x="35" y="267" font-family="monospace" font-size="13" font-weight="bold" fill="#10b981">DB1.DBX0.2 : Heartbeat (BOOL)</text>
+    <text x="35" y="286" font-family="sans-serif" font-size="11" fill="#a1a1aa">Direction: Python &rarr; S7-1200 PLC</text>
+    <text x="35" y="303" font-family="sans-serif" font-size="11" fill="#a7f3d0">250ms Life Pulse &rarr; Keeps TOF 1s Active</text>
+
+    <!-- Protocol footer -->
+    <rect x="20" y="325" width="320" height="35" rx="6" fill="#1c1917" stroke="#78716c" />
+    <text x="180" y="347" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#e7e5e4" text-anchor="middle">
+      ISO-on-TCP (RFC1006) | Port 102 | python-snap7
+    </text>
+  </g>
+
+  <!-- Right: Python Vision AI Runtime -->
+  <g transform="translate(820, 110)" filter="url(#shadow)">
+    <rect width="320" height="480" rx="12" fill="url(#factoryio)" stroke="#3b82f6" stroke-width="2" />
+    <rect width="320" height="50" rx="12" fill="url(#python)" />
+    <rect y="38" width="320" height="12" fill="url(#python)" />
+    <text x="160" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      PYTHON ASYNC RUNTIME
+    </text>
+
+    <!-- Block 1: Camera Loop -->
+    <rect x="20" y="70" width="280" height="75" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="92" font-family="monospace" font-size="13" font-weight="bold" fill="#60a5fa">Main GUI &amp; Camera Loop</text>
+    <text x="35" y="112" font-family="sans-serif" font-size="11" fill="#94a3b8">OpenCV Capture @ 30-60 FPS</text>
+    <text x="35" y="130" font-family="sans-serif" font-size="11" fill="#cbd5e1">HUD Dashboard Overlay &amp; BBoxes</text>
+
+    <!-- Block 2: Async Inference -->
+    <rect x="20" y="155" width="280" height="85" rx="6" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5" />
+    <text x="35" y="177" font-family="monospace" font-size="13" font-weight="bold" fill="#a78bfa">Async Inference Worker</text>
+    <text x="35" y="197" font-family="sans-serif" font-size="11" fill="#cbd5e1">Ultralytics YOLOv8 (pcb_model_V2.pt)</text>
+    <text x="35" y="215" font-family="sans-serif" font-size="11" fill="#c084fc">Decoupled Queue &bull; Native 1280x1280</text>
+    <text x="35" y="231" font-family="sans-serif" font-size="11" fill="#f43f5e">Instant Defect Flagging (open_circuit)</text>
+
+    <!-- Block 3: State Machine & 10s Window -->
+    <rect x="20" y="250" width="280" height="65" rx="6" fill="#0f172a" stroke="#334155" />
+    <text x="35" y="272" font-family="monospace" font-size="13" font-weight="bold" fill="#60a5fa">10s Dynamic Window Timer</text>
+    <text x="35" y="292" font-family="sans-serif" font-size="11" fill="#cbd5e1">Defect &rarr; Trigger=1 | Timeout &rarr; PASS</text>
+    <text x="35" y="307" font-family="sans-serif" font-size="11" fill="#94a3b8">Sync with DB1.DBX0.1 &amp; DB1.DBX0.0</text>
+
+    <!-- Block 4: Watchdog Thread -->
+    <rect x="20" y="325" width="280" height="65" rx="6" fill="#0f172a" stroke="#10b981" />
+    <text x="35" y="347" font-family="monospace" font-size="13" font-weight="bold" fill="#34d399">Watchdog Heartbeat Thread</text>
+    <text x="35" y="367" font-family="sans-serif" font-size="11" fill="#cbd5e1">Continuous 250ms Pulses &rarr; DB1.DBX0.2</text>
+    <text x="35" y="382" font-family="sans-serif" font-size="11" fill="#94a3b8">Hardware Safety Keepalive Daemon</text>
+
+    <rect x="20" y="415" width="280" height="45" rx="6" fill="#1e1b4b" stroke="#6366f1" />
+    <text x="160" y="442" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#c7d2fe" text-anchor="middle">
+      THREAD-SAFE SNAP7 &bull; PYTORCH CUDA
+    </text>
+  </g>
+
+  <!-- Connectors -->
+  <!-- PLC to DB1 -->
+  <line x1="380" y1="280" x2="420" y2="280" stroke="#00a399" stroke-width="3" stroke-dasharray="6,4" />
+  <line x1="380" y1="410" x2="420" y2="410" stroke="#f43f5e" stroke-width="3" />
+  
+  <!-- DB1 to Python -->
+  <line x1="780" y1="280" x2="820" y2="280" stroke="#3b82f6" stroke-width="3" stroke-dasharray="6,4" />
+  <line x1="780" y1="410" x2="820" y2="410" stroke="#10b981" stroke-width="3" />
+</svg>
