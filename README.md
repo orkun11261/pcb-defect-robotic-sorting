@@ -262,8 +262,8 @@ The 3D virtual cell replicates physical factory dynamics, allowing complete hard
 
 ### 1. Clone & Set Up Python Environment
 ```bash
-git clone https://github.com/orkun11261/Python_PLC.git
-cd Python_PLC
+git clone https://github.com/orkun11261/pcb-defect-robotic-sorting.git
+cd pcb-defect-robotic-sorting
 
 # Create and activate virtual environment
 python -m venv .venv
@@ -307,7 +307,7 @@ python src/vision_inspection.py --mock
 ## 📂 Repository Directory Layout
 
 ```
-Python_PLC/
+pcb-defect-robotic-sorting/
 ├── .github/
 │   └── workflows/
 │       └── lint.yml                  # GitHub Actions CI (Flake8, Black, isort)
