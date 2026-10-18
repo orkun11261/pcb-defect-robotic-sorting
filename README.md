@@ -319,8 +319,6 @@ pcb-defect-robotic-sorting/
 │   │   ├── network_8_robot_actuators.png
 │   │   ├── network_9_second_conveyor.png
 │   │   └── network_10_watchdog_stacklight.png
-│   ├── system_architecture.svg       # Vector industrial architecture diagram
-│   └── state_machine.svg             # Vector state machine flow diagram
 ├── factory_io/
 │   ├── PCB_Sorting_Cell.factoryio.txt# Digital Twin scene documentation
 │   └── README.md                     # Scene setup and driver binding guide
