@@ -308,9 +308,6 @@ python src/vision_inspection.py --mock
 
 ```
 pcb-defect-robotic-sorting/
-├── .github/
-│   └── workflows/
-│       └── lint.yml                  # GitHub Actions CI (Flake8, Black, isort)
 ├── assets/
 │   ├── plc_networks/                 # TIA Portal V18 LADDER network screenshots
 │   │   ├── network_2_start_stop.png
